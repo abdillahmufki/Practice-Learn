@@ -52,7 +52,7 @@
     <input type="text" placeholder="Pencarian" id="keyword">
     <button id="btn">Load Content</button>
     <div class="wrap">
-      <li>Nama : <strong id="hasil"></strong></li>
+      <li id="hasil"></li>
     </div>
   </div>
 
@@ -60,15 +60,16 @@
     function loadContent() {
       const ajax = new XMLHttpRequest();
       let text = document.getElementById("keyword").value;
+      let data = "keyword=" + text;
 
-      ajax.open("GET", "src/data.php?keyword=" + text, true);
-
+      ajax.open("POST", "src/data.php", true);
+      ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       ajax.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("hasil").textContent = this.responseText;
+          document.getElementById("hasil").innerHTML = this.responseText;
         }
       }
-      ajax.send();
+      ajax.send(data);
     }
     document.getElementById("btn").onclick = function() {
       loadContent();

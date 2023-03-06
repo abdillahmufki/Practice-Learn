@@ -1,2 +1,2 @@
 <?php
-echo $_GET['keyword'];
+echo "Nama : <strong>" . $_POST['keyword'] . "</strong>";
